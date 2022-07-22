@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: turquoise;
+}
+
+header{
+    background-color: rgb(0, 0, 0);
+    padding: 20px;
+}
+
+header > h1 {
+    color:white;
+    text-align: center;
+    font-family: sans-serif, Arial, Helvetica;
+}
+
+.score-board {
+    margin: 20px auto;
+    border: 2px solid black;
+    border-radius: 8px;
+    text-align: center;
+    width: 200px;
+    color: white;
+    font-size: 30px;
+    padding: 15px 20px;
+    font-family: sans-serif, Arial, Helvetica;
+
+}
+
+.badge{
+    background-color: rgb(233, 64, 13);
+    border-radius: 30px;
+    font-family: sans-serif, Arial, Helvetica;
+    font-size: 15px;
+    padding: 2px 2px;
+}
+
+#user-label {
+    position: relative;
+    top:30px;
+    left:-130px;
+}
+
+#computer-label {
+    position: relative;
+    top:9px;
+    right: -90%;
+}
+
+.result{
+    font-size: 40px;
+    text-align: center;
+}
+
+.result > p{
+    text-align: center;
+    font-weight: bold;
+    font-family: sans-serif, Arial, Helvetica;
+}
+
+.choices {
+    text-align: center;
+    margin:50px 0;
+}
+
+.choice{
+    border: 3px solid wheat;
+    border-radius: 50%;
+    margin: 0 15px;
+    padding: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.choice:hover{
+    cursor: pointer;
+    background: rgb(0, 47, 255);
+}
+
+#action-message{
+    text-align: center;
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: bold;
+    font-size: 20px
+}
+
+.green-glow{
+    border: 6px solid green;
+    box-shadow: 0 0 15px lightgreen;
+}
+
+.red-glow{
+    border: 6px solid rgb(234, 23, 37);
+    box-shadow: 0 0 15px rgb(252, 116, 116);
+}
+
+.gray-glow{
+    border: 6px solid rgb(82, 73, 74);
+    box-shadow: 0 0 15px rgb(214, 203, 203);
+}
