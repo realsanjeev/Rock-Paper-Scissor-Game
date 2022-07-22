@@ -1,7 +1,7 @@
 
 # Rock Paper Scissor Game
 
-##Rules of Rock Paper Scissor
+## Rules of Rock Paper Scissor
 - Rock beats scissors
 - Scissor cut paper
 - Paper wraps Rock
