@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-## Rock Paper Scissor Game
-Rock Paper Scissor is o
-  - Normal method for absolute beginner
-  - using Function method
-=======
+
 
 # Rock Paper Scissor Game
 Rock paper scissors is a hand game usually played between two people, in which each player simultaneously forms one of three shapes with an outstretched hand. These shapes are "rock" (a closed fist), "paper" (a flat hand), and "scissors" (a fist with the index finger and middle finger extended, forming a V). "Scissors" is identical to the two-fingered V sign (also indicating "victory" or "peace") except that it is pointed horizontally instead of being held upright in the air.
@@ -14,6 +9,4 @@ Rock paper scissors is a hand game usually played between two people, in which e
 - Paper wraps Rock
 
 This game is programed using python which output in console. And it is also programmed using HTML, CSS and JavaScript.
-
->>>>>>> 72fa25a3982005b67a54826004220c0495f0cc59
   
