@@ -5,6 +5,7 @@ const computerScore_span = document.getElementById("computer-score");
 
 const scoreBoard = document.querySelector(".score-board");
 const result = document.querySelector('.result');
+const final-result = document.querySelector('.final-Result')
 // creating variable for choice
 const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
@@ -87,6 +88,18 @@ function game(userChoice){
             break;
 
 
+    }
+}
+
+function finalWinner(userScore, computerScore){
+    if (userScore == computerScore){
+	final-result.innerHTML = `Final Evaluation is Draw`;
+	}
+    else if (userScore > computerScore){
+    	final-result.innerHTML = `Congratulation, You win!!!`;
+    	}
+    else{
+    	final-result.innerHTML = `Sorry, You Lose. Better Luck next time`
     }
 }
 
