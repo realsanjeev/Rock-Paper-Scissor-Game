@@ -5,7 +5,7 @@ const computerScore_span = document.getElementById("computer-score");
 
 const scoreBoard = document.querySelector(".score-board");
 const result = document.querySelector('.result');
-const final-result = document.querySelector('.final-Result')
+const finalEvaluation = document.querySelector('.final-Result')
 // creating variable for choice
 const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
@@ -38,7 +38,7 @@ function win(userChoice, computerChoice) {
 }
 
 function lose(userChoice, computerChoice){
-    const smallUserWord = 'user'.fontsize(3).substring();
+    const smallUserWord = 'user'.substring();
     const smallComputerWord = 'Computer'.fontsize(3).substring();
 
     computerScore++;
@@ -91,23 +91,22 @@ function game(userChoice){
     }
 }
 
-function finalWinner(userScore, computerScore){
+function finalWinner(){
     if (userScore == computerScore){
-	final-result.innerHTML = `Final Evaluation is Draw`;
+	finalEvaluation.innerHTML = `Final Evaluation is Draw`;
 	}
     else if (userScore > computerScore){
-    	final-result.innerHTML = `Congratulation, You win!!!`;
+    	finalEvaluation.innerHTML = `Congratulation, You win!!!`;
     	}
     else{
-    	final-result.innerHTML = `Sorry, You Lose. Better Luck next time`
+    	finalEvaluation.innerHTML = `Sorry, You Lose. Better Luck next time`
     }
 }
-
 function main(){
     rock.addEventListener('click', function(){
         game('rock');
     })
-    // function called and ddefined in another way
+    // function called and defined in another way
     paper.addEventListener('click', e => game('paper'));
 
     scissor.addEventListener('click', e => game('scissor') );
