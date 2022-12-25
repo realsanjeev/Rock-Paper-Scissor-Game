@@ -1,6 +1,10 @@
+'''import random for COMP_GUESS'''
 import random
 
-def getGameInfo():
+def get_game_info():
+    '''
+    print game info
+    '''
     print("Welcome To Rock Paper Scissor")
     print('''Rules for winning Game:
     1. Rock Vs Scissor => Rock(w)
@@ -8,30 +12,41 @@ def getGameInfo():
     3. Scissor Vs Paper => Scissor(w)
     ''')
 
-def getUserinput():
+def get_user_input():
+    '''
+    input user choice
+    user_guess: output param
+    '''
     flag = False
     print('-'*40)
-    while (flag == False):
-        userGuess = input("Your turn Rock (r) Paper (p) scisssor(s)? ")
-        userGuess = userGuess.lower()
-        if userGuess == 'r' or userGuess == 'p' or userGuess == 's':
-            return userGuess
+    while flag is False:
+        user_guess = input("Your turn Rock (r) Paper (p) scisssor(s)? ")
+        user_guess = user_guess.lower()
+        if user_guess == 'r' or user_guess == 'p' or user_guess == 's':
+            return user_guess
         else:
             print("Please input valid key")
 
-def generateCompinput():
+def generate_compinput():
+    '''
+    computer choice
+    computer_guess: output param
+    '''
     comp = random.randint(1,3)
 
     # computer choice in string value
     if comp == 0:
-        compGuess = 'r'
+        comp_guess = 'r'
     elif comp == 1:
-        compGuess = 'p'
+        comp_guess = 'p'
     else:
-        compGuess = 's'
-    return compGuess
+        comp_guess = 's'
+    return comp_guess
 
-def getPlayerGuess(c_in, u_in):
+def get_player_guess(c_in, u_in):
+    '''
+    printing player and computer choice
+    '''
     if c_in == 'r':
         c_val ='Rock'
     elif c_in == 's':
@@ -49,7 +64,10 @@ def getPlayerGuess(c_in, u_in):
     print(f'Computer Guess is {c_val}\nYour Guess is {u_val}')
 
 
-def getGameResult(c_in,u_in):
+def get_game_result(c_in,u_in):
+    '''
+    print result
+    '''
     if u_in == 'r':
         if c_in == 's':
             print('You Win')
@@ -63,12 +81,12 @@ def getGameResult(c_in,u_in):
 
 
 if __name__=='__main__':
-    getGameInfo()
-    while (True):
-        comp_input = generateCompinput()
-        user_input = getUserinput()
-        getPlayerGuess(comp_input, user_input)
-        getGameResult(comp_input, user_input)
+    get_game_info()
+    while True:
+        COMP_INPUT = generate_compinput()
+        user_input = get_user_input()
+        get_player_guess(COMP_INPUT, user_input)
+        get_game_result(COMP_INPUT, user_input)
         retry = input('Do you want to play again(Y/N)?: ').lower()
         if retry !='y':
             exit()
