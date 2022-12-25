@@ -1,48 +1,62 @@
-import pygame  
-from connection import Network  
+'''import pygame library'''
+import socket
+import pygame
+from connection import Network
 
-pygame.font.init() 
-# create window 
-width = 600 
-height = 600 
- 
-winPos_x = 0  
-winPos_y = 20 
+pygame.font.init()
+# create window
+WIDTH = 600
+HEIGHT = 600
 
-win = pygame.display.set_mode((width, height), winPos_x, winPos_y) 
-pygame.display.set_caption("Client") 
- 
+WIN_POS_Y = 0
+WIN_POS_Y = 20
+
+win = pygame.display.set_mode((WIDTH, HEIGHT), WIN_POS_Y, WIN_POS_Y)
+pygame.display.set_caption("Client")
 
 class Button:
-    def __init__(self, text, x, y, color):
+    '''
+    class for button
+    '''
+    def __init__(self, text, pos_x, pos_y, color):
         self.text = text
-        self.x = x
-        self.y = y
+        self.x = pos_x
+        self.y = pos_y
         self.color = color
         self.width = 150
         self.height = 100
 
     def draw(self, win):
+        '''
+        draw
+        '''
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height))
         font = pygame.font.SysFont('comicsans', 30)
         text = font.render(self.text, 1, (255,255,255))
-        win.blit(text, (self.x + round(self.width/2) - round(text.get_width()/2), self.y + round(self.height/2) - round(text.get_height()/2)))
+        win.blit(text, (self.x + round(self.width/2) - round(text.get_width()/2),
+                                self.y + round(self.height/2) - round(text.get_height()/2)))
 
     def click(self, pos):
-        x1 = pos[0]
-        y1 = pos[1]
-        if (self.x <= x1 <= self.x+self.width) and (self.y <= y1 <= self.y+self.height):
+        '''
+        click in option
+        '''
+        pos_x = pos[0]
+        pos_y = pos[1]
+        if (self.x <= pos_x <= self.x+self.width) and (self.y <= pos_y <= self.y+self.height):
             return True
         else:
             return False
 
-def redrawWindow(win, game, p):
+def redraw_window(win, game, player):
+    '''
+    Game window
+    '''
     win.fill((128,128,128))
 
-    if not (game.connection()):
+    if not game.connection():
         font = pygame.font.SysFont('comicsans', 80)
         text = font.render('Waiting for player...!', 1, (255,0,0), True)
-        win.blit(text, (width/2 - text.get_width()/2, height/2 - text.get_height()/2))
+        win.blit(text, (WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
     else:
         font = pygame.font.SysFont('comicsans', 50)
         text = font.render('Your move', 1, (0,255,255))
@@ -57,21 +71,21 @@ def redrawWindow(win, game, p):
             text1 = font.render(move1, 1, (0,0,0))
             text2 = font.render(move2, 1, (0,0,0))
         else:
-            if game.p1Action and p == 0:
+            if game.p1Action and player == 0:
                 text1 = font.render(move1, 1, (0,0,0))
             elif game.p1Action:
                 text1 = font.render('Locked In', 1, (0,0,0))
             else:
                 text1 = font.render('Waiting....', 1, (0,0,0))
 
-            if game.p2Action and p == 1:
+            if game.p2Action and player == 1:
                 text2 = font.render(move2, 1, (0,0,0))
             elif game.p2Action:
                 text2 = font.render('Locked in',1, (0,0,0))
             else:
                 text2 = font.render('Waiting...',1, (0,0,0))
 
-        if p == 1:
+        if player == 1:
             win.blit(text2, (100,250))
             win.blit(text1, (400,350))
         else:
@@ -83,33 +97,40 @@ def redrawWindow(win, game, p):
 
     pygame.display.update()
 
-buttons = [Button('Rock',50,500,(0,0,0)), Button('Scissors',230,500,(250,0,0)), Button('Paper',450,500,(0,255,0))]
+buttons = [
+            Button('Rock',50,500,(0,0,0)),
+            Button('Scissors',230,500,(250,0,0)),
+            Button('Paper',450,500,(0,255,0))
+            ]
 
-def main(): 
-    session = True 
-    clock = pygame.time.Clock() 
-    n = Network() 
-    player = int(n.getid())
+def main():
+    '''
+    main function
+    '''
+    session = True
+    clock = pygame.time.Clock()
+    network = Network()
+    player = int(network.getid())
     print ('You are a player', player)
-    
+
     while session:
         clock.tick(60)
-        try:     
-            game = n.send('get')
+        try:
+            game = network.send('get')
             print('='*20, game, '='*20)
-        except Exception as e:
+        except socket.error as err:
             session = False
-            print("couldn't get game")
+            print("couldn't get game", err)
             break
-        
+
         if game.action():
-            redrawWindow(win, game, player)
+            redraw_window(win, game, player)
             pygame.time.delay(600)
             try:
-                game = n.send('reset')
-            except exception as E:
+                game = network.send('reset')
+            except socket.error as err:
                 session = False
-                print("Couldn't get game", E)
+                print("Couldn't get game", err)
                 break
 
             font = pygame.font.SysFont('comicsans', 45)
@@ -120,7 +141,7 @@ def main():
             else:
                 text = font.render('You Lost!', 1, (255,0,0))
 
-            win.blit(text, (width/2 - text.get_width()/2, height/2 - text.get_height()/2))
+            win.blit(text, (WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
             pygame.display.update()
             pygame.time.delay(2000)
         for event in pygame.event.get():
@@ -134,14 +155,17 @@ def main():
                     if btn.click(pos) and game.connection():
                         if player == 0:
                             if not game.p1Action:
-                                n.send(btn.text)
+                                network.send(btn.text)
                         else:
                             if not game.p2Action:
-                                n.send(btn.text)
+                                network.send(btn.text)
 
-        redrawWindow(win, game, player)
+        redraw_window(win, game, player)
 
 def menu_screen():
+    '''
+    menu screen function
+    '''
     session = True
     clock = pygame.time.Clock()
 
@@ -155,11 +179,11 @@ def menu_screen():
         
         '''
         text = font.render(intro_text, 1, (255,0,0))
-        win.blit(text, (width/2 - text.get_width()/2, height/2 - text.get_height()/2))
+        win.blit(text, (WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
         pygame.display.update()
 
-        for event in pygame.event.get(): 
-            if event.type == pygame.QUIT: 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 session = False
             if event.type == pygame.MOUSEBUTTONDOWN:
