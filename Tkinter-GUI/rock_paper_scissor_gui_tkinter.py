@@ -1,6 +1,6 @@
-from tkinter import *
+'''import library for GUI'''
 import os
-from PIL import Image, ImageTk
+from tkinter import Tk, Label, PhotoImage
 
 IMAGE_DIR_PATH = 'images'
 
@@ -10,12 +10,15 @@ root.title('Rock paper Scissor - GUI')
 headerFont = ("Arial bold", 30)
 
 def result():
+    '''
+    result for output
+    '''
     text = '''Paper cover Rock.
             Rock destroy Scissor.
             Scissor cut paper'''
-    resultFont= ('Arial bold', 25)
-    resultLabel = Label(text=text, font=resultFont, fg='Gray')
-    resultLabel.pack(side='bottom')
+    result_font = ('Arial bold', 25)
+    result_label = Label(text=text, font=result_font, fg='Gray')
+    result_label.pack(side='bottom')
 
 header = Label(text='Rock Paper Scissor', font=headerFont, bg='black', fg='White')
 header.pack(fill='x')
@@ -33,4 +36,3 @@ result()
 
 if __name__=="__main__":
     root.mainloop()
-    
