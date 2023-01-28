@@ -3,13 +3,22 @@ let computerScore = 0;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 
-const scoreBoard = document.querySelector(".score-board");
+// const scoreBoard = document.querySelector(".score-board");
 const result = document.querySelector('.result');
 const finalEvaluation = document.querySelector('.final-Result')
 // creating variable for choice
 const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
 const scissor = document.getElementById('scissor');
+
+// Function to convert string to Title Case
+function titleCase(str) {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(' ');
+    }
 
 function getComputerChoice(){
     const choices = ['rock','paper','scissor'];
@@ -20,14 +29,14 @@ function getComputerChoice(){
 
 function win(userChoice, computerChoice) {
     // making subscript for better user interaction
-    const smallUserWord = 'user'.fontsize(3).substring();
+    const smallUserWord = 'User'.fontsize(3).substring();
     const smallComputerWord = 'Computer'.fontsize(3).substring();
 
     userScore++;
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
     // result.innerHTML = userChoice + ' beats ' + computerChoice + ' You Win..';
-    result.innerHTML = `${userChoice}${smallUserWord} beats ${computerChoice}${smallComputerWord}.
+    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} beats ${titleCase(computerChoice)}${smallComputerWord}.
                       You Win..`;
     //   Adding Css Effect after user makes choice
     document.getElementById(userChoice).classList.add('green-glow')
@@ -38,14 +47,14 @@ function win(userChoice, computerChoice) {
 }
 
 function lose(userChoice, computerChoice){
-    const smallUserWord = 'user'.substring();
+    const smallUserWord = 'User'.fontsize(3).substring();
     const smallComputerWord = 'Computer'.fontsize(3).substring();
 
     computerScore++;
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
     // Showing result in html page
-    result.innerHTML = `${userChoice}${smallUserWord} loses to ${computerChoice}${smallComputerWord}.  You Lose..`;
+    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} loses to ${titleCase(computerChoice)}${smallComputerWord}.  You Lose..`;
 
     document.getElementById(computerChoice).classList.add('green-glow')
     document.getElementById(userChoice).classList.add('red-glow')
@@ -57,7 +66,7 @@ function lose(userChoice, computerChoice){
 function draw(userChoice, computerChoice){
     const smallUserWord = 'user'.fontsize(3).substring();
     const smallComputerWord = 'Computer'.fontsize(3).substring();
-    result.innerHTML = `${userChoice}${smallUserWord} equals ${computerChoice}${smallComputerWord}.  Game is Draw.. `;
+    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} equals ${titleCase(computerChoice)}${smallComputerWord}.  Game is Draw.. `;
     
     document.getElementById(computerChoice).classList.add('gray-glow')
     document.getElementById(userChoice).classList.add('gray-glow')
@@ -86,8 +95,6 @@ function game(userChoice){
         case 'scissorscissor':
             draw(userChoice, computerChoice);
             break;
-
-
     }
 }
 

@@ -5,11 +5,11 @@
 }
 
 body{
-    background-color: turquoise;
+    background-color: rgba(47, 51, 150, 0.777);
 }
 
 header{
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(62, 59, 59);
     padding: 20px;
 }
 
@@ -20,14 +20,14 @@ header > h1 {
 }
 
 .score-board {
-    margin: 20px auto;
+    margin: 5px auto;
     border: 2px solid black;
     border-radius: 8px;
     text-align: center;
-    width: 200px;
+    width: 150px;
     color: white;
     font-size: 30px;
-    padding: 15px 20px;
+    padding: 5px 10px;
     font-family: sans-serif, Arial, Helvetica;
 
 }
@@ -42,18 +42,18 @@ header > h1 {
 
 #user-label {
     position: relative;
-    top:30px;
-    left:-130px;
+    top: 30px;
+    left: -75%;
 }
 
 #computer-label {
     position: relative;
-    top:9px;
-    right: -90%;
+    top: 9px;
+    right: -75%;
 }
 
 .result{
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
 }
 
@@ -65,13 +65,13 @@ header > h1 {
 
 .choices {
     text-align: center;
-    margin:50px 0;
+    margin: 10px 0;
 }
 
 .choice{
     border: 3px solid wheat;
     border-radius: 50%;
-    margin: 0 15px;
+    margin: 0 5px;
     padding: 20px;
     display: inline-block;
     transition: all 0.3s ease;
