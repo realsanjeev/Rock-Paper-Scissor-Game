@@ -65,7 +65,6 @@ def redraw_window(win, game, player):
 
         for btn in buttons:
             btn.draw(win)
-
     pygame.display.update()
 
 buttons = [
@@ -148,7 +147,7 @@ def menu_screen():
         text = font.render(intro_text, 1, (255,0,0))
         win.blit(text, (WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
         pygame.display.update()
-        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
