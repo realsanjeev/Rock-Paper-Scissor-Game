@@ -42,7 +42,7 @@ def redraw_window(win, game, player):
             if game.p1Action and player == 0:
                 text1 = font.render(move1, 1, (0,0,0))
             elif game.p1Action:
-                text1 = font.render('Locked In', 1, (0,0,0))
+                text1 = font.render('Locked In!!', 1, (0,0,0))
             else:
                 text1 = font.render('Waiting....', 1, (0,0,0))
 
@@ -54,10 +54,10 @@ def redraw_window(win, game, player):
                 text2 = font.render('Waiting...',1, (0,0,0))
 
         if player == 1:
-            win.blit(text2, (100,250))
+            win.blit(text2, (100,350))
             win.blit(text1, (400,350))
         else:
-            win.blit(text1, (100,250))
+            win.blit(text1, (100,350))
             win.blit(text2, (400,350))
 
         for btn in buttons:
@@ -141,11 +141,7 @@ def menu_screen():
         clock.tick(50)
         win.fill((128, 128, 128))
         font = pygame.font.SysFont('comicsans',75)
-        intro_text = '''
-        Click to Play
-        
-        
-        '''
+        intro_text = '''Click to Play '''
         text = font.render(intro_text, 1, (255,0,0))
         win.blit(text, (WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
         pygame.display.update()

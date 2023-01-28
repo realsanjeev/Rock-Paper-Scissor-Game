@@ -1,6 +1,6 @@
 import pickle
-from _thread import *
 import socket
+from _thread import *
 from game import Game
 
 serverAddr = socket.gethostname()
