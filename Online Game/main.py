@@ -2,6 +2,7 @@
 import socket
 import pygame
 from connection import Network
+from button_handler import Button
 
 pygame.font.init()
 # create window
@@ -13,39 +14,6 @@ WIN_POS_Y = 20
 
 win = pygame.display.set_mode((WIDTH, HEIGHT), WIN_POS_Y, WIN_POS_Y)
 pygame.display.set_caption("Client")
-
-class Button:
-    '''
-    class for button
-    '''
-    def __init__(self, text, pos_x, pos_y, color):
-        self.text = text
-        self.x = pos_x
-        self.y = pos_y
-        self.color = color
-        self.width = 150
-        self.height = 100
-
-    def draw(self, win):
-        '''
-        draw
-        '''
-        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height))
-        font = pygame.font.SysFont('comicsans', 30)
-        text = font.render(self.text, 1, (255,255,255))
-        win.blit(text, (self.x + round(self.width/2) - round(text.get_width()/2),
-                                self.y + round(self.height/2) - round(text.get_height()/2)))
-
-    def click(self, pos):
-        '''
-        click in option
-        '''
-        pos_x = pos[0]
-        pos_y = pos[1]
-        if (self.x <= pos_x <= self.x+self.width) and (self.y <= pos_y <= self.y+self.height):
-            return True
-        else:
-            return False
 
 def redraw_window(win, game, player):
     '''
