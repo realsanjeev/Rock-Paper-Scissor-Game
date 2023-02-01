@@ -1,4 +1,7 @@
 # MultiPlayer Rock Paper Scissor
+To play this game first run `server.py` and open new terminal to run `client.py`
+
+## About Project
 External library used. Install pygame for GUI interface
 ```
 pip3 install pygame
