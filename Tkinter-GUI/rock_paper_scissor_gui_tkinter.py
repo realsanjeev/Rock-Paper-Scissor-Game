@@ -2,7 +2,7 @@
 import glob
 import random
 import tkinter as tk
-from PIL import Image, ImageTk   
+from PIL import Image, ImageTk
 
 IMAGE_DIR_PATH = glob.glob('*/*.png')
 SIZE = (100, 100)
@@ -24,14 +24,15 @@ image_frame.pack(expand=1, fill='both')
 footer_frame = tk.Frame(root, background='gray')
 footer_frame.pack(expand=1, fill='both')
 
-header_text = 'Rock Paper Scissor - Game'
+HEADER_TEXT = 'Rock Paper Scissor - Game'
 headerFont = ("Arial bold", 30)
-header = tk.Label(header_frame, 
-                    text=header_text , 
-                    font=headerFont, bg='black', fg='White')
-header.pack(fill='x')   
+header = tk.Label(header_frame,
+                    text=HEADER_TEXT ,
+                    font=headerFont,
+                    bg='black', fg='White')
+header.pack(fill='x')
 
-score_board = tk.Label(header_frame, text='Computer:0  User:0', 
+score_board = tk.Label(header_frame, text='Computer:0  User:0',
                         bg='skyblue', fg='white',
                         font=('?', 15))
 score_board.pack(fill='x')
@@ -55,24 +56,26 @@ def computer_guess() -> str:
     else:
         return 'scissor'
 
-def score_board_update(USER_WIN: int, COMPUTER_WIN: int):
+def score_board_update(user_win_count: int, computer_win_count: int):
     '''
     Args:
-        USER_WIN: int -> count user win
-        COMPUTER_WIN: int -> count computer win
+        user_win_count: int -> count user win
+        computer_win_count: int -> count computer win
     Result:
         Change config for score board
     '''
-    if USER_WIN == COMPUTER_WIN:
-        score_board.config(text=f'Computer:{COMPUTER_WIN}  User:{USER_WIN}', bg='skyblue')
-    elif USER_WIN > COMPUTER_WIN:
-        score_board.config(text=f'Computer:{COMPUTER_WIN}  User:{USER_WIN}', bg='skyblue', fg='green')
+    if user_win_count == computer_win_count:
+        score_board.config(text=f'Computer:{computer_win_count}  User:{user_win_count}')
+    elif user_win_count > computer_win_count:
+        score_board.config(text=f'Computer:{computer_win_count}  User:{user_win_count}',
+                            bg='skyblue', fg='green')
     else:
-        score_board.config(text=f'Computer:{COMPUTER_WIN}  User:{USER_WIN}', bg='skyblue', fg='red')
+        score_board.config(text=f'Computer:{computer_win_count}  User:{user_win_count}',
+                            bg='skyblue', fg='red')
 
 def who_win(user_guess: str):
     '''
-    Args: 
+    Args:
         user_guess: str -> given by user
     Return:
         change configure for result, score bord and hint label
@@ -86,7 +89,9 @@ def who_win(user_guess: str):
     if user_guess == cpu_guess:
         result_game.configure(text='Latest result: Game is Draw!!!!', fg='gray', bg='white')
 
-    elif (user_guess == 'rock' and cpu_guess == 'paper') or (user_guess == 'paper' and cpu_guess == 'scissor') or (user_guess == 'scissor' and cpu_guess == 'rock'):
+    elif (user_guess == 'rock' and cpu_guess == 'paper') or\
+    (user_guess == 'paper' and cpu_guess == 'scissor') or\
+    (user_guess == 'scissor' and cpu_guess == 'rock'):
         USER_WIN += 1
         result_game.config(text='Latest result: You win the Game!!!!', bg='green', fg='white')
         print('*'*66)
@@ -100,8 +105,6 @@ def who_win(user_guess: str):
         ''')
     hint_label.pack_configure(fill='x')
 
-    pass
-
 def image_file(images_path: list):
     '''
     Get image file ready for passing as argument in tkinker method
@@ -111,34 +114,34 @@ def image_file(images_path: list):
     Return:
         image file: list -> list of images
     '''
-    imgs = []
+    imgs_lst = []
     for image_path in images_path:
-        im = Image.open(image_path)
-        im.thumbnail(SIZE)
-        imgs.append(ImageTk.PhotoImage(im))
-    return imgs
+        image = Image.open(image_path)
+        image.thumbnail(SIZE)
+        imgs_lst.append(ImageTk.PhotoImage(image))
+    return imgs_lst
 
 imgs = image_file(IMAGE_DIR_PATH)
-rock_button = tk.Button(image_frame, 
-                        image=imgs[1], 
+rock_button = tk.Button(image_frame,
+                        image=imgs[1],
                         activebackground='blue',
                         command=lambda: who_win('Rock'))
 rock_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
 
-paper_button = tk.Button(image_frame, 
-                        image=imgs[0], 
+paper_button = tk.Button(image_frame,
+                        image=imgs[0],
                         activebackground='blue',
                         command=lambda: who_win('Paper'))
 paper_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
 
-scissor_button = tk.Button(image_frame, 
-                        image=imgs[2], 
+scissor_button = tk.Button(image_frame,
+                        image=imgs[2],
                         activebackground='blue',
                         command=lambda: who_win('Scissor'))
 scissor_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
 
-text = '''Paper cover Rock.\nRock destroy Scissor.\nScissor cut paper'''
-hint_label = tk.Label(footer_frame, text=text, 
+hint_label = tk.Label(footer_frame,
+                        text='Paper cover Rock.\nRock destroy Scissor.\nScissor cut paper',
                         font=('Arial bold', 25), fg='Gray')
 hint_label.pack(side='bottom', fill='x')
 
