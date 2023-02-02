@@ -13,13 +13,15 @@ root.maxsize(width=685, height=445)
 root.title('Rock paper Scissor - GUI')
 root.iconbitmap(bitmap='images/icon.ico')
 
+# define frame for element adjustment
 header_frame = tk.Frame(root)
 header_frame.pack(fill='x')
 image_frame = tk.Frame(root, background='gray')
 image_frame.pack(expand=1, fill='both')
 
 headerFont = ("Arial bold", 30)
-header = tk.Label(header_frame, text='Rock Paper Scissor - Game', 
+header = tk.Label(header_frame, 
+                    text='Rock Paper Scissor - Game', 
                     font=headerFont, bg='black', fg='White')
 header.pack(fill='x')   
 
@@ -38,31 +40,45 @@ def result():
     result_label = tk.Label(text=text, font=result_font, fg='Gray')
     result_label.pack(side='bottom')
 
-def whowin():
-    text =ibutton.getint()
-    print('This is img value: ', text)
+def who_win(value: str):
+    print('This is img value: ', value)
     pass
 
+def image_file(image_path: str):
+    '''
+    Get image file ready for passing as argument in tkinker method
+
+    Args:
+        image_str: str -> path for image
+    Return:
+        image file
+    '''
+    im = Image.open(image_path)
+    im.thumbnail(SIZE)
+    return ImageTk.PhotoImage(im)
 
 print('*'*100)
 print(IMAGE_DIR_PATH)
-imgs = []
-img_var = tk.IntVar()
-value = 0 
-for file in IMAGE_DIR_PATH:
-    if file[-3:]=='png':
-        value += 1
-        img_var.set(value)
-        im = Image.open(file)
-        im.thumbnail(SIZE)
-        imgs.append(ImageTk.PhotoImage(im))
-        
-        photo = tk.PhotoImage(file=file)
-        ibutton = tk.Button(image_frame, image=imgs[-1], 
-                                activebackground='blue', textvariable=img_var, command=whowin)
-        ibutton.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
 
+print('Images :', image_file)
 
+rock_button = tk.Button(image_frame, 
+                        image=image_file(IMAGE_DIR_PATH[0]), 
+                        activebackground='blue',
+                        command=lambda: who_win('Rock'))
+rock_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
+
+paper_button = tk.Button(image_frame, 
+                        image=image_file(IMAGE_DIR_PATH[1]), 
+                        activebackground='blue',
+                        command=lambda: who_win('Paper'))
+paper_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
+
+scissor_button = tk.Button(image_frame, 
+                        image=image_file(IMAGE_DIR_PATH[2]), 
+                        activebackground='blue',
+                        command=lambda: who_win('Scissor'))
+scissor_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
 result()
 
 if __name__=="__main__":
