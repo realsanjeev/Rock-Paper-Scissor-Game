@@ -1,7 +1,6 @@
 '''import library for GUI'''
 import glob
 import random
-import time
 import tkinter as tk
 from PIL import Image, ImageTk   
 
@@ -57,6 +56,13 @@ def computer_guess() -> str:
         return 'scissor'
 
 def score_board_update(USER_WIN: int, COMPUTER_WIN: int):
+    '''
+    Args:
+        USER_WIN: int -> count user win
+        COMPUTER_WIN: int -> count computer win
+    Result:
+        Change config for score board
+    '''
     if USER_WIN == COMPUTER_WIN:
         score_board.config(text=f'Computer:{COMPUTER_WIN}  User:{USER_WIN}', bg='skyblue')
     elif USER_WIN > COMPUTER_WIN:
@@ -65,6 +71,12 @@ def score_board_update(USER_WIN: int, COMPUTER_WIN: int):
         score_board.config(text=f'Computer:{COMPUTER_WIN}  User:{USER_WIN}', bg='skyblue', fg='red')
 
 def who_win(user_guess: str):
+    '''
+    Args: 
+        user_guess: str -> given by user
+    Return:
+        change configure for result, score bord and hint label
+    '''
     global USER_WIN, COMPUTER_WIN
 
     user_guess = user_guess.lower()
