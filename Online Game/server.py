@@ -1,17 +1,23 @@
+'''
+Server connection for multi player online
+'''
 import pickle
 import socket
-from _thread import *
+from _thread import start_new_thread
 from game import Game
 
 serverAddr = socket.gethostname()
 print('#'*10, serverAddr)
-port = 1222
+PORT = 1222
+connected = set()
+games = {}
+ID_COUNT = 0
 
 connect = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print(connect)
 
 try:
-    connect.bind((serverAddr, port))
+    connect.bind((serverAddr, PORT))
 except socket.error as er:
     print('#'*10, 'error')
     print(er)
@@ -19,20 +25,20 @@ except socket.error as er:
 connect.listen(2)
 print('Wating for connection, Server started')
 
-connected = set()
-games = {}
-idCount = 0
+def threading_client_connection(connection, player, id_game):
+    '''
+    Args:
+        connection: connection with network
+        id_game: id for game between two game
+    '''
+    global ID_COUNT
+    connection.send(str.encode(str(player)))
 
-def threading_client_connection(conn, p, gameId):
-    global idCount
-    conn.send(str.encode(str(p)))
-
-    reply = ""
     while True:
         try:
-            data = conn.recv(4096).decode()
-            if gameId in games:
-                game = games[gameId]
+            data = connection.recv(4096).decode()
+            if id_game in games:
+                game = games[id_game]
 
                 if not data:
                     break
@@ -40,33 +46,33 @@ def threading_client_connection(conn, p, gameId):
                     if data == 'reset':
                         game.resetAction()
                     elif data != 'get':
-                        game.play(p, data)
-                conn.sendall(pickle.dumps(game))
+                        game.play(player, data)
+                connection.sendall(pickle.dumps(game))
             else:
                 break
-        except:
+        except socket.error:
             break
     print('Lost Connection')
     try:
-        del games[gameId]
-        print('closing Game', gameId)
-    except:
-        pass
-    idCount -= 1
-    conn.close()
+        del games[id_game]
+        print('closing Game', id_game)
+    except socket.error as err:
+        print(f'Error while deleting game_id: {err}')
+    ID_COUNT -= 1
+    connection.close()
 
 
 while True:
     conn, addr = connect.accept()
     print('Connected to: ', addr)
 
-    idCount += 1
-    p = 0
-    gameId = (idCount - 1)//2  # return integer
-    if idCount % 2 == 1:
-        games[gameId] = Game(gameId)
+    ID_COUNT += 1
+    PLAYER = 0
+    GAME_ID = (ID_COUNT - 1)//2  # return integer
+    if ID_COUNT % 2 == 1:
+        games[GAME_ID] = Game(GAME_ID)
         print('creating a new game...')
     else:
-        games[gameId].ready = True
-        p = 1
-    start_new_thread(threading_client_connection, (conn, p, gameId))
+        games[GAME_ID].ready = True
+        PLAYER = 1
+    start_new_thread(threading_client_connection, (conn, PLAYER, GAME_ID))

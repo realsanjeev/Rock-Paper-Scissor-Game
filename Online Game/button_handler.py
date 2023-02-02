@@ -1,3 +1,6 @@
+'''
+Importing pygame for handling button
+'''
 import pygame
 class Button:
     '''
@@ -5,7 +8,7 @@ class Button:
     '''
     def __init__(self, text, pos_x, pos_y, color):
         '''
-        Args: 
+        Args:
             text: str -> Text inside button
             pos_x: int -> X coordinate for button
             pos_y: int -> Y coordinate for button

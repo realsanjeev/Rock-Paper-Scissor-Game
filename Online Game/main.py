@@ -12,7 +12,7 @@ WIDTH = 650
 HEIGHT = 600
 WIN_POS_Y = 0
 WIN_POS_Y = 20
-ICON = pygame.image.load('icon.png') 
+ICON = pygame.image.load('icon.png')
 win = pygame.display.set_mode((WIDTH, HEIGHT), WIN_POS_Y, WIN_POS_Y)
 
 pygame.display.set_caption("Client")
@@ -42,16 +42,16 @@ def redraw_window(win, game, player):
             text1 = font.render(move1, 1, (0,0,0))
             text2 = font.render(move2, 1, (0,0,0))
         else:
-            if game.p1Action and player == 0:
+            if game.p1_action and player == 0:
                 text1 = font.render(move1, 1, (0,0,0))
-            elif game.p1Action:
+            elif game.p1_action:
                 text1 = font.render('Locked In!', 1, (0,0,0))
             else:
                 text1 = font.render('Waiting....', 1, (0,0,0))
 
-            if game.p2Action and player == 1:
+            if game.p2_action and player == 1:
                 text2 = font.render(move2, 1, (0,0,0))
-            elif game.p2Action:
+            elif game.p2_action:
                 text2 = font.render('Locked In!',1, (0,0,0))
             else:
                 text2 = font.render('Waiting...',1, (0,0,0))
@@ -90,7 +90,7 @@ def main():
             # print('='*20, game, '='*20)
         except socket.error as err:
             session = False
-            # print("couldn't get game", err)
+            print("couldn't get game", err)
             break
 
         if game.action():
@@ -124,10 +124,10 @@ def main():
                 for btn in buttons:
                     if btn.click(pos) and game.connection():
                         if player == 0:
-                            if not game.p1Action:
+                            if not game.p1_action:
                                 network.send(btn.text)
                         else:
-                            if not game.p2Action:
+                            if not game.p2_action:
                                 network.send(btn.text)
 
         redraw_window(win, game, player)
