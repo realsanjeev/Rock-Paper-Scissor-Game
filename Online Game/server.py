@@ -44,7 +44,7 @@ def threading_client_connection(connection, player, id_game):
                     break
                 else:
                     if data == 'reset':
-                        game.resetAction()
+                        game.reset_action()
                     elif data != 'get':
                         game.play(player, data)
                 connection.sendall(pickle.dumps(game))

@@ -92,12 +92,12 @@ def who_win(user_guess: str):
     elif (user_guess == 'rock' and cpu_guess == 'paper') or\
     (user_guess == 'paper' and cpu_guess == 'scissor') or\
     (user_guess == 'scissor' and cpu_guess == 'rock'):
+        COMPUTER_WIN += 1
+        result_game.config(text='Latest result: You Lose!!!!', bg='red', fg='white')
+    else:
         USER_WIN += 1
         result_game.config(text='Latest result: You win the Game!!!!', bg='green', fg='white')
         print('*'*66)
-    else:
-        COMPUTER_WIN += 1
-        result_game.config(text='Latest result: You Lose!!!!', bg='red', fg='white')
     score_board_update(USER_WIN, COMPUTER_WIN)
     hint_label.config(text=f'''
         User choice:    {user_guess.upper()}
