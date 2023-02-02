@@ -44,38 +44,41 @@ def who_win(value: str):
     print('This is img value: ', value)
     pass
 
-def image_file(image_path: str):
+def image_file(images_path: list):
     '''
     Get image file ready for passing as argument in tkinker method
 
     Args:
-        image_str: str -> path for image
+        images_path: list -> list of paths for image
     Return:
-        image file
+        image file: list -> list of images
     '''
-    im = Image.open(image_path)
-    im.thumbnail(SIZE)
-    return ImageTk.PhotoImage(im)
+    imgs = []
+    for image_path in images_path:
+        im = Image.open(image_path)
+        im.thumbnail(SIZE)
+        imgs.append(ImageTk.PhotoImage(im))
+    return imgs
 
 print('*'*100)
 print(IMAGE_DIR_PATH)
 
-print('Images :', image_file)
+imgs = image_file(IMAGE_DIR_PATH)
 
 rock_button = tk.Button(image_frame, 
-                        image=image_file(IMAGE_DIR_PATH[0]), 
+                        image=imgs[0], 
                         activebackground='blue',
                         command=lambda: who_win('Rock'))
 rock_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
 
 paper_button = tk.Button(image_frame, 
-                        image=image_file(IMAGE_DIR_PATH[1]), 
+                        image=imgs[1], 
                         activebackground='blue',
                         command=lambda: who_win('Paper'))
 paper_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
 
 scissor_button = tk.Button(image_frame, 
-                        image=image_file(IMAGE_DIR_PATH[2]), 
+                        image=imgs[2], 
                         activebackground='blue',
                         command=lambda: who_win('Scissor'))
 scissor_button.pack(side='left', padx=50, pady=50, ipadx=15, ipady=25)
