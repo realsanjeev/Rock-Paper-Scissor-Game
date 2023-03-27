@@ -18,12 +18,12 @@ function titleCase(str) {
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
     }
     return str.join(' ');
-    }
+}
 
-function getComputerChoice(){
-    const choices = ['rock','paper','scissor'];
+function getComputerChoice() {
+    const choices = ['rock', 'paper', 'scissor'];
     // making random choices using index which is randomly generated
-    const randomNumber = Math.floor(Math.random() *3);
+    const randomNumber = Math.floor(Math.random() * 3);
     return choices[randomNumber]
 }
 
@@ -42,11 +42,11 @@ function win(userChoice, computerChoice) {
     document.getElementById(userChoice).classList.add('green-glow')
     document.getElementById(computerChoice).classList.add('red-glow')
     // Removing effect after fixed settime
-    setTimeout(function(){document.getElementById(userChoice).classList.remove('green-glow')}, 1000)
-    setTimeout(function(){document.getElementById(computerChoice).classList.add('red-glow')}, 1000)
+    setTimeout(function () { document.getElementById(userChoice).classList.remove('green-glow') }, 1000)
+    setTimeout(function () { document.getElementById(computerChoice).classList.add('red-glow') }, 1000)
 }
 
-function lose(userChoice, computerChoice){
+function lose(userChoice, computerChoice) {
     const smallUserWord = 'User'.fontsize(3).substring();
     const smallComputerWord = 'Computer'.fontsize(3).substring();
 
@@ -59,25 +59,25 @@ function lose(userChoice, computerChoice){
     document.getElementById(computerChoice).classList.add('green-glow')
     document.getElementById(userChoice).classList.add('red-glow')
 
-    setTimeout(function(){document.getElementById(computerChoice).classList.remove('green-glow')}, 1000)
-    setTimeout(function(){document.getElementById(userChoice).classList.remove('red-glow')}, 1000)
+    setTimeout(function () { document.getElementById(computerChoice).classList.remove('green-glow') }, 1000)
+    setTimeout(function () { document.getElementById(userChoice).classList.remove('red-glow') }, 1000)
 }
 
-function draw(userChoice, computerChoice){
+function draw(userChoice, computerChoice) {
     const smallUserWord = 'user'.fontsize(3).substring();
     const smallComputerWord = 'Computer'.fontsize(3).substring();
     result.innerHTML = `${titleCase(userChoice)}${smallUserWord} equals ${titleCase(computerChoice)}${smallComputerWord}.  Game is Draw.. `;
-    
+
     document.getElementById(computerChoice).classList.add('gray-glow')
     document.getElementById(userChoice).classList.add('gray-glow')
 
-    setTimeout(function(){document.getElementById(userChoice).classList.remove('gray-glow')}, 1000)
-    setTimeout(function(){document.getElementById(userChoice).classList.remove('gray-glow')}, 1000)
+    setTimeout(function () { document.getElementById(userChoice).classList.remove('gray-glow') }, 1000)
+    setTimeout(function () { document.getElementById(userChoice).classList.remove('gray-glow') }, 1000)
 }
 
-function game(userChoice){
+function game(userChoice) {
     const computerChoice = getComputerChoice();
-    console.log('User choice => '+ userChoice)
+    console.log('User choice => ' + userChoice)
     console.log('Computer choice =>' + computerChoice)
     switch (userChoice + computerChoice) {
         case 'rockscissor':
@@ -98,25 +98,25 @@ function game(userChoice){
     }
 }
 
-function finalWinner(){
-    if (userScore == computerScore){
-	finalEvaluation.innerHTML = `Final Evaluation is Draw`;
-	}
-    else if (userScore > computerScore){
-    	finalEvaluation.innerHTML = `Congratulation, You win!!!`;
-    	}
-    else{
-    	finalEvaluation.innerHTML = `Sorry, You Lose. Better Luck next time`
+function finalWinner() {
+    if (userScore == computerScore) {
+        finalEvaluation.innerHTML = `Final Evaluation is Draw`;
+    }
+    else if (userScore > computerScore) {
+        finalEvaluation.innerHTML = `Congratulation, You win!!!`;
+    }
+    else {
+        finalEvaluation.innerHTML = `Sorry, You Lose. Better Luck next time`
     }
 }
-function main(){
-    rock.addEventListener('click', function(){
+function main() {
+    rock.addEventListener('click', function () {
         game('rock');
     })
     // function called and defined in another way
     paper.addEventListener('click', e => game('paper'));
 
-    scissor.addEventListener('click', e => game('scissor') );
+    scissor.addEventListener('click', e => game('scissor'));
 }
 
 main();

@@ -7,9 +7,5 @@ Rock paper scissors is a hand game usually played between two people, in which e
 - Paper wraps Rock
 
 This game is programed using python which output in console. And it is also programmed using HTML, CSS and JavaScript.
-For python you need pillow and pygame package
-```
-$ pip install pillow
-$ pip install pygame
-```
+
   
