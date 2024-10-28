@@ -1,6 +1,8 @@
 '''import pygame library'''
 import socket
 import pygame
+
+from game import Game
 from connection import Network
 from button_handler import Button
 
@@ -12,7 +14,7 @@ WIDTH = 650
 HEIGHT = 600
 WIN_POS_Y = 0
 WIN_POS_Y = 20
-ICON = pygame.image.load('icon.png')
+ICON = pygame.image.load('images/icon.png')
 win = pygame.display.set_mode((WIDTH, HEIGHT), WIN_POS_Y, WIN_POS_Y)
 
 pygame.display.set_caption("Client")
@@ -80,6 +82,7 @@ def main():
     session = True
     clock = pygame.time.Clock()
     network = Network()
+    
     player = int(network.getid())
     pygame.display.set_caption(f"Player: {player}")
 
