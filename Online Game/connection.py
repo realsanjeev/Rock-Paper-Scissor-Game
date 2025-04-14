@@ -35,7 +35,7 @@ class Network:
             self.client.connect(self.addr)
             return self.client.recv(2048).decode()
         except socket.error as err:
-            print('Searching connection......!', err)
+            print(f'[ERROR]: Searching connection to connect to server due to {err}')
 
     def send(self, data):
         '''
@@ -48,4 +48,4 @@ class Network:
             self.client.send(str.encode(data))
             return pickle.loads(self.client.recv((2048)))
         except socket.error as err:
-            print(err)
+            print(f"[ERROR]:Couldnot send the data to the connection due to: {err}")

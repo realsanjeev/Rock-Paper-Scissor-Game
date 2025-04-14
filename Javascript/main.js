@@ -3,120 +3,108 @@ let computerScore = 0;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 
-// const scoreBoard = document.querySelector(".score-board");
 const result = document.querySelector('.result');
-const finalEvaluation = document.querySelector('.final-Result')
-// creating variable for choice
+const finalEvaluation = document.querySelector('.Final-Result');
+
 const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
-const scissor = document.getElementById('scissor');
+const scissors = document.getElementById('scissors');
 
-// Function to convert string to Title Case
+// Convert string to title case
 function titleCase(str) {
     str = str.toLowerCase().split(' ');
-    for (var i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
     }
     return str.join(' ');
 }
 
 function getComputerChoice() {
-    const choices = ['rock', 'paper', 'scissor'];
-    // making random choices using index which is randomly generated
+    const choices = ['rock', 'paper', 'scissors'];
     const randomNumber = Math.floor(Math.random() * 3);
-    return choices[randomNumber]
+    return choices[randomNumber];
 }
 
 function win(userChoice, computerChoice) {
-    // making subscript for better user interaction
-    const smallUserWord = 'User'.fontsize(3).substring();
-    const smallComputerWord = 'Computer'.fontsize(3).substring();
+    const smallUserWord = '<span class="small-label">User</span>';
+    const smallComputerWord = '<span class="small-label">Computer</span>';
 
     userScore++;
     userScore_span.innerHTML = userScore;
-    computerScore_span.innerHTML = computerScore;
-    // result.innerHTML = userChoice + ' beats ' + computerChoice + ' You Win..';
-    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} beats ${titleCase(computerChoice)}${smallComputerWord}.
-                      You Win..`;
-    //   Adding Css Effect after user makes choice
-    document.getElementById(userChoice).classList.add('green-glow')
-    document.getElementById(computerChoice).classList.add('red-glow')
-    // Removing effect after fixed settime
-    setTimeout(function () { document.getElementById(userChoice).classList.remove('green-glow') }, 1000)
-    setTimeout(function () { document.getElementById(computerChoice).classList.add('red-glow') }, 1000)
+    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} beats ${titleCase(computerChoice)}${smallComputerWord}. <br>You Win!`;
+
+    document.getElementById(userChoice).classList.add('green-glow');
+    document.getElementById(computerChoice).classList.add('red-glow');
+
+    setTimeout(() => {
+        document.getElementById(userChoice).classList.remove('green-glow');
+        document.getElementById(computerChoice).classList.remove('red-glow');
+    }, 1000);
+
+    document.getElementById("action-message").innerHTML = "Make Your move"; // Reset message
 }
 
 function lose(userChoice, computerChoice) {
-    const smallUserWord = 'User'.fontsize(3).substring();
-    const smallComputerWord = 'Computer'.fontsize(3).substring();
+    const smallUserWord = '<span class="small-label">User</span>';
+    const smallComputerWord = '<span class="small-label">Computer</span>';
 
     computerScore++;
-    userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
-    // Showing result in html page
-    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} loses to ${titleCase(computerChoice)}${smallComputerWord}.  You Lose..`;
+    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} loses to ${titleCase(computerChoice)}${smallComputerWord}. <br>You Lose.`;
 
-    document.getElementById(computerChoice).classList.add('green-glow')
-    document.getElementById(userChoice).classList.add('red-glow')
+    document.getElementById(userChoice).classList.add('red-glow');
+    document.getElementById(computerChoice).classList.add('green-glow');
 
-    setTimeout(function () { document.getElementById(computerChoice).classList.remove('green-glow') }, 1000)
-    setTimeout(function () { document.getElementById(userChoice).classList.remove('red-glow') }, 1000)
+    setTimeout(() => {
+        document.getElementById(userChoice).classList.remove('red-glow');
+        document.getElementById(computerChoice).classList.remove('green-glow');
+    }, 1000);
+
+    document.getElementById("action-message").innerHTML = "Make Your move"; // Reset message
 }
 
 function draw(userChoice, computerChoice) {
-    const smallUserWord = 'user'.fontsize(3).substring();
-    const smallComputerWord = 'Computer'.fontsize(3).substring();
-    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} equals ${titleCase(computerChoice)}${smallComputerWord}.  Game is Draw.. `;
+    const smallUserWord = '<span class="small-label">User</span>';
+    const smallComputerWord = '<span class="small-label">Computer</span>';
 
-    document.getElementById(computerChoice).classList.add('gray-glow')
-    document.getElementById(userChoice).classList.add('gray-glow')
+    result.innerHTML = `${titleCase(userChoice)}${smallUserWord} equals ${titleCase(computerChoice)}${smallComputerWord}. <br>It's a Draw.`;
 
-    setTimeout(function () { document.getElementById(userChoice).classList.remove('gray-glow') }, 1000)
-    setTimeout(function () { document.getElementById(userChoice).classList.remove('gray-glow') }, 1000)
+    document.getElementById(userChoice).classList.add('gray-glow');
+    document.getElementById(computerChoice).classList.add('gray-glow');
+
+    setTimeout(() => {
+        document.getElementById(userChoice).classList.remove('gray-glow');
+        document.getElementById(computerChoice).classList.remove('gray-glow');
+    }, 1000);
+
+    document.getElementById("action-message").innerHTML = "Make Your move";
 }
 
 function game(userChoice) {
     const computerChoice = getComputerChoice();
-    console.log('User choice => ' + userChoice)
-    console.log('Computer choice =>' + computerChoice)
     switch (userChoice + computerChoice) {
-        case 'rockscissor':
+        case 'rockscissors':
         case 'paperrock':
-        case 'scissorpaper':
+        case 'scissorspaper':
             win(userChoice, computerChoice);
             break;
         case 'rockpaper':
-        case 'paperscissor':
-        case 'scissorrock':
+        case 'paperscissors':
+        case 'scissorsrock':
             lose(userChoice, computerChoice);
             break;
         case 'rockrock':
         case 'paperpaper':
-        case 'scissorscissor':
+        case 'scissorsscissors':
             draw(userChoice, computerChoice);
             break;
     }
 }
 
-function finalWinner() {
-    if (userScore == computerScore) {
-        finalEvaluation.innerHTML = `Final Evaluation is Draw`;
-    }
-    else if (userScore > computerScore) {
-        finalEvaluation.innerHTML = `Congratulation, You win!!!`;
-    }
-    else {
-        finalEvaluation.innerHTML = `Sorry, You Lose. Better Luck next time`
-    }
-}
 function main() {
-    rock.addEventListener('click', function () {
-        game('rock');
-    })
-    // function called and defined in another way
-    paper.addEventListener('click', e => game('paper'));
-
-    scissor.addEventListener('click', e => game('scissor'));
+    rock.addEventListener('click', () => game('rock'));
+    paper.addEventListener('click', () => game('paper'));
+    scissors.addEventListener('click', () => game('scissors'));
 }
 
 main();

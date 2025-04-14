@@ -103,3 +103,9 @@ header > h1 {
     border: 6px solid rgb(82, 73, 74);
     box-shadow: 0 0 15px rgb(214, 203, 203);
 }
+
+.small-label {
+    font-size: 12px;
+    vertical-align: super;
+    opacity: 0.7;
+}

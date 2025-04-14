@@ -52,19 +52,21 @@ class Game:
         '''
         return winner of game
         '''
-        p1_player = self.moves[0].upper()[0]
-        p2_player = self.moves[1].upper()[0]
+        if self.moves[0] is None or self.moves[1] is None:
+            return -1 # No winner if moves aren't set
+        p1 = self.moves[0].upper()[0]
+        p2 = self.moves[1].upper()[0]
+
+        if p1 == p2:
+            return 2 # Tie game
 
         winner = -1
-        if (p1_player == 'R' and p2_player == 'S') or\
-             (p1_player == 'P' and p2_player =='R') or\
-             (p1_player == 'S' and p2_player == 'P'):
-            winner = 0
-        elif (p2_player == 'R' and p1_player == 'S') or\
-             (p2_player == 'P' and p1_player =='R') or\
-             (p2_player == 'S' and p1_player == 'P'):
-            winner = 1
-        return winner
+        if (p1 == 'R' and p2 == 'S') or \
+             (p1 == 'P' and p2 =='R') or \
+             (p1 == 'S' and p2 == 'P'):
+            return 0 # p1 win
+        else:
+            return 1 # p2 win
 
 
     def reset_action(self):
@@ -73,3 +75,4 @@ class Game:
         '''
         self.p1_action = False
         self.p2_action = False
+        self.moves = [None, None]

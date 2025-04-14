@@ -13,14 +13,14 @@ connected = set()
 games = {}
 ID_COUNT = 0
 
-connect = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print(connect)
 
 try:
+    connect = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    connect.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    print(connect)
     connect.bind((serverAddr, PORT))
 except socket.error as er:
-    print('#'*10, 'error')
-    print(er)
+    print(f'ERROR: Error when creating connection to sokcet due to: `{er}`')
 
 connect.listen(2)
 print('Wating for connection, Server started')
@@ -54,7 +54,7 @@ def threading_client_connection(connection, player, id_game):
             break
     print('Lost Connection')
     try:
-        del games[id_game]
+        game = games.pop(id_game, None)
         print('closing Game', id_game)
     except socket.error as err:
         print(f'Error while deleting game_id: {err}')
@@ -73,6 +73,8 @@ while True:
         games[GAME_ID] = Game(GAME_ID)
         print('creating a new game...')
     else:
+        while GAME_ID not in games:
+            pass # wait until game is created (race condition)
         games[GAME_ID].ready = True
         PLAYER = 1
     start_new_thread(threading_client_connection, (conn, PLAYER, GAME_ID))
