@@ -20,3 +20,6 @@ pip install pillow
 1. Loads the images for the game using the image_file() function and creates buttons for each of the choices (rock, paper, and scissors) using the images.
 1. Creates a label for the footer frame to display a hint for the game.
 1. Starts the main loop for the GUI.
+
+**References**
+* [Window Icon in Tk](https://pythonassets.com/posts/window-icon-in-tk-tkinter/)
