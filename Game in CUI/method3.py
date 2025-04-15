@@ -40,7 +40,7 @@ def get_user_input():
     flag = False
     print('-'*40)
     while flag is False:
-        user_guess = input("Your turn Rock (r) Paper (p) scisssor(s)? ")
+        user_guess = input("Your turn Rock (r) Paper (p) Scissor(s)? ")
         user_guess = user_guess.lower()
         if user_guess in ['r', 'p', 's']:
             flag = True
@@ -83,15 +83,15 @@ def get_game_result(c_in, u_in):
     print('-'*40)
     print(f"Computer Guess is '{game_option[c_in]}'\nYour Guess is '{game_option[u_in]}'")
 
-    if u_in == 'r':
-        if c_in == 's':
-            print('++++ You Win ++++')
-        elif c_in =='p':
-            print('---- You lose ----')
-    elif u_in =='s' and c_in =='p':
+    # Determine the winner based on game rules
+    if u_in == c_in:
+        print('.... Game is tie ....')
+    elif (u_in == 'r' and c_in == 's') or \
+         (u_in == 'p' and c_in == 'r') or \
+         (u_in == 's' and c_in == 'p'):
         print('++++ You Win ++++')
     else:
-        print('.... Game is tie ....')
+        print('---- You lose ----')
     print('-'*40)
 
 if __name__=='__main__':

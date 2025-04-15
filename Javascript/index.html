@@ -5,38 +5,88 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
+    <title>Rock Paper Scissors - Modern Edition</title>
+    <meta name="description"
+        content="Play an exciting game of Rock Paper Scissors with stunning visuals and smooth animations">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <h1>Rock Paper Scissors</h1>
-    </header>
-    <div class="score-board">
-        <div id="user-label" class="badge">User</div>
-        <div id="computer-label" class="badge">Computer</div>
-        <span id="user-score">0</span>:<span id="computer-score">0</span>
-    </div>
+    <div class="container">
+        <header>
+            <h1 class="title">
+                <span class="title-gradient">Rock Paper Scissors</span>
+            </h1>
+            <p class="subtitle">Choose your weapon wisely!</p>
+        </header>
 
-    <div class="result">
-        <p>Paper cover rock.</br>Rock destroy Scissors.</br>Scissors cut paper</p>
-    </div>
-
-    <div class="choices">
-        <div class="choice" id="rock">
-            <img src="images/rock.PNG" alt="Rock" width="100" height="100">
-        </div>
-        <div class="choice" id="paper">
-            <img src="images/paper.PNG" alt="Paper" width="100" height="100">
-        </div>
-        <div class="choice" id="scissors">
-            <img src="images/scissor.PNG" alt="Scissors" width="100" height="100">
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">You</div>
+                <div id="user-score" class="score-value">0</div>
+            </div>
+            <div class="score-divider">:</div>
+            <div class="score-item">
+                <div class="score-label">Computer</div>
+                <div id="computer-score" class="score-value">0</div>
+            </div>
         </div>
 
-        <p id="action-message">Make Your move</p>
+        <div class="result-container">
+            <div id="result-message" class="result-message">
+                <p>Make your first move!</p>
+            </div>
+            <div id="choices-display" class="choices-display"></div>
+        </div>
+
+        <div class="game-rules">
+            <div class="rule-item">
+                <span class="rule-icon">🪨</span>
+                <span class="rule-text">Rock crushes Scissors</span>
+            </div>
+            <div class="rule-item">
+                <span class="rule-icon">📄</span>
+                <span class="rule-text">Paper covers Rock</span>
+            </div>
+            <div class="rule-item">
+                <span class="rule-icon">✂️</span>
+                <span class="rule-text">Scissors cut Paper</span>
+            </div>
+        </div>
+
+        <div class="choices">
+            <div class="choice" id="rock" data-choice="rock">
+                <div class="choice-inner">
+                    <img src="images/rock.PNG" alt="Rock" width="120" height="120">
+                    <span class="choice-label">Rock</span>
+                </div>
+            </div>
+            <div class="choice" id="paper" data-choice="paper">
+                <div class="choice-inner">
+                    <img src="images/paper.PNG" alt="Paper" width="120" height="120">
+                    <span class="choice-label">Paper</span>
+                </div>
+            </div>
+            <div class="choice" id="scissors" data-choice="scissors">
+                <div class="choice-inner">
+                    <img src="images/scissor.PNG" alt="Scissors" width="120" height="120">
+                    <span class="choice-label">Scissors</span>
+                </div>
+            </div>
+        </div>
+
+        <button id="reset-btn" class="reset-btn">Reset Game</button>
     </div>
-    <div class='Final-Result'>
+
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
     <script src="main.js"></script>

@@ -20,10 +20,10 @@ try:
     print(connect)
     connect.bind((serverAddr, PORT))
 except socket.error as er:
-    print(f'ERROR: Error when creating connection to sokcet due to: `{er}`')
+    print(f'ERROR: Error when creating connection to socket due to: `{er}`')
 
 connect.listen(2)
-print('Wating for connection, Server started')
+print('Waiting for connection, Server started')
 
 def threading_client_connection(connection, player, id_game):
     '''

@@ -43,7 +43,7 @@ while True:
     # prompt the user for their choice and validate input
     FLAG = False
     while FLAG is False:
-        user_guess = input("Your turn Rock (r) Paper (p) scisssor(s)? ")
+        user_guess = input("Your turn Rock (r) Paper (p) Scissor(s)? ")
         user_guess = user_guess.lower()
         if user_guess in choice:
             FLAG = True

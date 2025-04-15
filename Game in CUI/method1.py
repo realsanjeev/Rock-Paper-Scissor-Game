@@ -19,9 +19,9 @@ print('''Rules for winning Game:
     ''')
 
 while True:
-    USER_GUESS = input("Your Choice Rock (r) Papoer (p) scisssor(s)? ")
+    USER_GUESS = input("Your Choice Rock (r) Paper (p) Scissor(s)? ")
     if USER_GUESS.lower() not in ['r', 'p', 's']:
-        print(f"Invalid error. Kerword {USER_GUESS} doesnot exist")
+        print(f"Invalid error. Keyword '{USER_GUESS}' does not exist")
     else:
         break
 

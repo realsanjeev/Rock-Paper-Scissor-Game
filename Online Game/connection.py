@@ -48,4 +48,4 @@ class Network:
             self.client.send(str.encode(data))
             return pickle.loads(self.client.recv((2048)))
         except socket.error as err:
-            print(f"[ERROR]:Couldnot send the data to the connection due to: {err}")
+            print(f"[ERROR]: Could not send the data to the connection due to: {err}")

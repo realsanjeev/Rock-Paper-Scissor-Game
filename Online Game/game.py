@@ -18,8 +18,8 @@ class Game:
     def get_player_move(self, player):
         '''
         Args:
-            player -> player eho made move
-        Retuen:
+            player -> player who made move
+        Return:
             Move of player
         '''
         return self.moves[player]
@@ -28,7 +28,7 @@ class Game:
         '''
         Args:
             player: id of player
-            move: which option id delected by user
+            move: which option is selected by user
         '''
         self.moves[player] = move
         if player == 0:
@@ -60,7 +60,6 @@ class Game:
         if p1 == p2:
             return 2 # Tie game
 
-        winner = -1
         if (p1 == 'R' and p2 == 'S') or \
              (p1 == 'P' and p2 =='R') or \
              (p1 == 'S' and p2 == 'P'):
